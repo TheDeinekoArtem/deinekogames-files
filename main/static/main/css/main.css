@@ -1,0 +1,220 @@
+body {
+    background: #2c2c2c;
+    display: flex;
+    min-height: 100vh;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 22%;
+    height: 100vh;
+    padding: 2.5%;
+    background: #181818;
+    color: #fff;
+    border-right: 5px solid #4d4d4d;
+}
+
+.logo-and-icon-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Отступ снизу для разделения с другим контентом */
+}
+
+.avatar-container {
+    position: relative; /* Относительное позиционирование для контейнера аватарки */
+    display: flex;
+    align-items: flex-end;
+}
+
+.avatar-icon {
+    border-radius: 50%;
+    max-height: 80px;
+}
+
+.youtube-link {
+    position: absolute; /* Абсолютное позиционирование для иконки YouTube */
+    bottom: 10%; /* Смещение вверх относительно нижней части аватарки */
+    right: 0; /* Смещение вправо относительно аватарки */
+}
+
+.youtube-icon {
+    width: 25px; /* Установленная ширина иконки YouTube */
+    height: 25px; /* Установленная высота иконки YouTube */
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.logo-button, .logo-button-small {
+    display: block; /* Элементы рассматриваются как блочные */
+    font-family: 'Rubik', sans-serif;
+    text-decoration: none;
+    color: white;
+    text-align: center; /* Выравнивание текста по центру */
+    margin: 1px 0; /* Уменьшенный вертикальный отступ */
+    margin-left: 10px;
+}
+
+.logo-button {
+    font-size: 25px;
+    font-weight: 550;
+    line-height: 1.2; /* Управление высотой строки */
+}
+
+.logo-button-small {
+    font-size: 15px;
+    font-weight: 450;
+    line-height: 1.2; /* Управление высотой строки */
+}
+
+/* Стили для больших экранов, которые вы уже определили, остаются без изменений */
+
+/* Стили для маленьких экранов (например, крупные мобильные телефоны) */
+@media (max-width: 1542px) {
+    aside {
+        width: 30%; /* Увеличение ширины меню для маленьких экранов */
+    }
+
+    .avatar-icon {
+        max-height: 50px; /* Дальнейшее уменьшение размера аватарки */
+    }
+
+    .logo-button {
+        font-size: 18px; /* Дальнейшее уменьшение размера текста */
+    }
+
+    .logo-button-small {
+        font-size: 10px; /* Дальнейшее уменьшение размера меньшего текста */
+    }
+
+    .youtube-icon {
+        width: 15px; /* Дальнейшее уменьшение размера иконки YouTube */
+        height: 15px;
+    }
+}
+
+/* Стили для средних экранов (например, планшеты) */
+@media (max-width: 1024px) {
+    aside {
+        width: 35%; /* Увеличение ширины меню для средних экранов */
+    }
+
+    .avatar-icon {
+        max-height: 60px; /* Уменьшение размера аватарки */
+    }
+
+    .logo-button {
+        font-size: 20px; /* Уменьшение размера текста */
+    }
+
+    .logo-button-small {
+        font-size: 12px; /* Уменьшение размера меньшего текста */
+    }
+
+    .youtube-icon {
+        width: 20px; /* Уменьшение размера иконки YouTube */
+        height: 20px;
+    }
+}
+
+/* Стили для маленьких экранов (например, крупные мобильные телефоны) */
+@media (max-width: 768px) {
+    aside {
+        width: 47%; /* Увеличение ширины меню для маленьких экранов */
+    }
+
+    .avatar-icon {
+        max-height: 50px; /* Дальнейшее уменьшение размера аватарки */
+    }
+
+    .logo-button {
+        font-size: 18px; /* Дальнейшее уменьшение размера текста */
+    }
+
+    .logo-button-small {
+        font-size: 10px; /* Дальнейшее уменьшение размера меньшего текста */
+    }
+
+    .youtube-icon {
+        width: 15px; /* Дальнейшее уменьшение размера иконки YouTube */
+        height: 15px;
+    }
+}
+
+/* Стили для очень маленьких экранов (например, мобильные телефоны) */
+@media (max-width: 480px) {
+    aside {
+        width: 100%; /* Меню занимает всю ширину экрана */
+        height: auto; /* Высота становится автоматической */
+        padding: 10px; /* Уменьшение отступа */
+    }
+
+    .logo-and-icon-container {
+        flex-direction: column; /* Стек элементов вертикально */
+        align-items: center; /* Центрирование элементов */
+    }
+
+    .avatar-container {
+        justify-content: center; /* Центрирование аватарки */
+    }
+
+    .text-container {
+        align-items: center; /* Центрирование текстов */
+    }
+
+    .logo-button, .logo-button-small {
+        text-align: center; /* Центрирование текста */
+        margin: 5px 0; /* Увеличение отступа */
+    }
+
+    .youtube-link {
+        position: static; /* Удаление абсолютного позиционирования */
+        order: -1; /* Помещение иконки YouTube над аватаркой */
+    }
+
+    .youtube-icon {
+        width: 30px; /* Увеличение размера иконки YouTube */
+        height: 30px;
+        margin: 5px 0; /* Установка отступа для иконки */
+    }
+
+    aside h3 {
+        font-size: 24px; /* Уменьшение размера заголовка */
+    }
+
+    aside ul li {
+        font-size: 18px; /* Уменьшение размера текста пунктов меню */
+    }
+}
+
+aside h3 {
+    font-size: 30px;
+    text-decoration: none;
+    margin-top: 30px;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+aside ul li {
+    color: #fff;
+    display: block;
+    margin-top: 15px;
+    margin-left: 25px;
+    font-size: 20px;
+    transition: transform .3s ease;
+}
+
+aside ul li:hover, aside ul a:hover {
+    color: #eb5959;
+    text-decoration: none;
+    transform: scale(1.05);
+}
