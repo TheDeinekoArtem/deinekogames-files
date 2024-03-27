@@ -28,19 +28,8 @@
         <h3>Навигация</h3>
         <ul>
             <li><a href="" class="nav-link"><i class="fa-solid fa-house"></i> Главная</a></li>
-            <li><a href="" class="nav-link"><i class="fa-solid fa-plus"></i> Создать ссылку</a></li>
-            <li><a href="" class="nav-link"><i class="fa-solid fa-link"></i> Все ссылки</a></li>
-            <li><a href="" class="nav-link"><i class="fa-solid fa-circle-info"></i> Поддержка</a></li>
-            <li><a href="" class="nav-link"><i class="fa-solid fa-gear"></i> Настройки</a></li>
-            <form id="logoutForm" action="{% url 'logout' %}" method="POST" style="display: none;">
-            {% csrf_token %}
-            </form>
-
-            <li>
-                <a href="#" class="nav-link" onclick="document.getElementById('logoutForm').submit(); return false;">
-                    <i class="fa-solid fa-right-from-bracket"></i> Выйти
-                </a>
-            </li>
+            <li><a href="" class="nav-link"><i class="fa-solid fa-address-card"></i> Про нас</a></li>
+            <li><a href="" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Контакты</a></li>
         </ul>
     </aside>
     <main>
