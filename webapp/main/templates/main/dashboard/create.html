@@ -1,0 +1,62 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block title %}Профиль Страница{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'main/css/create.css' %}">
+{% endblock head %}
+
+{% block content %}
+</head>
+<body>
+      <h1>СОЗДАНИЕ НОВОЙ ССЫЛКИ</h1>
+  <div class="form-container">
+    <div class="content-selector">
+       <div class="content-button active">
+         <a href="#" class="content-button-text-link"><i class="fa-solid fa-link fa-2xs"></i> Ссылка</a>
+       </div>
+       <div class="content-button">
+          <a href="#" class="content-button-text-text"><i class="fa-solid fa-font"></i> Текст</a>
+       </div>
+    </div>
+    <input type="text" class="input-field" placeholder="Введите заголовок... *">
+    <input type="text" class="input-field" placeholder="Введите ссылку... *">
+      <div class="action-container">
+            <span class="add-action-text"><i class="fa-solid fa-trophy"></i> Добавить действие</span>
+            <button class="action-container-button" id="actionButton">Действие</button>
+        </div>
+          <!-- Контейнер для новых кнопок и полей, которые будут добавляться -->
+            <div id="newActionsContainer" class="new-actions-container"></div>
+         <!-- Убедитесь, что у вас только один элемент с ID myModal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Выберите действие:</p>
+                <!-- Используйте data-action атрибуты вместо onclick -->
+                <button class="menu-item" data-action="channel">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span class="menu-item-text">ㅤПодписаться на канал</span>
+                </button>
+                <button class="menu-item" data-action="video">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span class="menu-item-text">ㅤПоставить лайк на видео</span>
+                </button>
+                <button class="menu-item" data-action="comment">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span class="menu-item-text">ㅤОставить комментарий</span>
+                </button>
+                <button class="menu-item" data-action="watch">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span class="menu-item-text">ㅤПосмотреть видео 30 секунд</span>
+                </button>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+    <script src="{% static 'main/js/create.js' %}"></script>
+</body>
+{% endblock %}
