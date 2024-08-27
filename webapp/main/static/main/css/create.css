@@ -289,16 +289,183 @@ body {
 .action {
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* Если нужно выравнивание в начале элемента */
+  margin-top: 20px;
+  margin-left: -75px;
   justify-content: center;
   padding: 10px 20px;
   color: white;
   background-color: #eb5959; /* Замените это значение для каждого типа действия */
   border-radius: 5px;
-  margin: 20px auto;
   cursor: pointer;
-  width: 420px; /* Соответствует ширине input-field */
+  width: calc(100% - 20%); /* Вычитаем ширину кнопки удаления и немного места */
+}
+
+.menu-youtube {
+  top: 15%;
+  margin-right: 10px;
 }
 
 .fa-youtube {
+  top: 15%;
   margin-right: 10px;
+}
+
+.action-content {
+  display: flex;
+  flex-direction: column; /* Добавлено для вертикального расположения */
+  align-items: center;
+  position: relative;
+}
+
+.delete-action-button {
+  position: absolute; /* Абсолютное позиционирование относительно .action-content */
+  right: 5px; /* Расстояние от правого края .action-content */
+  transform: translateY(45%); /* Центрирование кнопки по вертикали */
+  padding: 11.20px 26px;
+  background-color: #eb5959; /* Цвет фона кнопки */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Скругление краев кнопки, чтобы соответствовать кнопке действия */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.905em;
+  z-index: 2; /* Повышаем z-index чтобы обеспечить видимость кнопки */
+}
+
+/* Стили для сворачиваемого элемента */
+.accordion-toggle {
+  display: block;
+  width: 420px; /* Ширина кнопки, соответствующая полям ввода */
+  padding: 10px; /* Внутренний отступ, как у полей ввода */
+  margin: 15px auto; /* Вертикальный отступ 15px, горизонтальный автоматический */
+  background: #8f7a65; /* Цвет фона кнопки */
+  color: white;
+  border: 1px solid #555; /* Граница, как у полей ввода */
+  border-radius: 5px; /* Скругление углов */
+  cursor: pointer; /* Курсор в виде указателя */
+  position: relative; /* Для позиционирования иконки стрелки */
+  align-items: left; /* Центрирование содержимого кнопки по вертикали */
+  justify-content: space-between; /* Распределение содержимого по краям */
+}
+
+.accordion-toggle i {
+  margin-right: 5px; /* Отступ иконок от текста */
+}
+
+.accordion-toggle #arrow-icon {
+  position: absolute;
+  right: 10px; /* Позиционирование иконки стрелки справа */
+  top: 50%; /* Центрирование иконки по вертикали */
+  transform: translateY(-50%); /* Смещение для точного центрирования */
+}
+
+.accordion-content {
+    display: none;
+    background: #444;
+    border: 1px solid #555;
+    border-radius: 0 0 5px 5px;
+    width: 420px;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.cover-image-label {
+  margin-right: 7px;
+  margin-left: 7px;
+  color: #aaa;
+  font-size: 15px;
+  font-weight: 550;
+  display: block; /* Разместить текст на отдельной строке */
+  margin-bottom: 10px; /* Отступ снизу для разделения текста и поля загрузки */
+}
+
+.file-upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Равномерное распределение пространства */
+}
+
+.file-display-input {
+  flex-grow: 1; /* Заполнение доступного горизонтального пространства */
+  padding: 10px;
+  margin-right: 10px; /* Отступ от кнопки выбора файла */
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 5px;
+  color: white;
+  text-align: center; /* Центрирование текста */
+  font-size: 16px; /* Размер шрифта, аналогичный другим элементам */
+}
+
+.file-select-button {
+  padding: 10px 20px;
+  background: #555;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap; /* Убедиться, что текст кнопки остается на одной строке */
+}
+
+/* Иконка файла в input */
+.file-display-input::before {
+  content: '\f15b'; /* Unicode иконки файла из Font Awesome */
+  font-family: 'Font Awesome 5 Free'; /* Указываем шрифт для иконки */
+  margin-right: 10px; /* Отступ для иконки */
+  color: #aaa; /* Цвет иконки */
+}
+
+/* Стили для кнопки "Дополнительные Настройки" */
+.accordion-toggle-settings {
+  background: #3a405a; /* Отличающийся цвет фона */
+  color: white; /* Цвет текста */
+  border: 1px solid #555; /* Граница */
+}
+
+.accordion-content {
+  display: none;
+  border: 1px solid #555;
+  border-radius: 0 0 5px 5px;
+  box-sizing: border-box;
+}
+
+/* Дополнительные стили для новой кнопки аккордеона */
+.accordion-toggle-settings {
+    background: #3a405a;
+    color: white;
+    border: 1px solid #555;
+}
+
+.arrow-icon-settings {
+    position: absolute;
+  right: 10px; /* Позиционирование иконки стрелки справа */
+  top: 50%; /* Центрирование иконки по вертикали */
+  transform: translateY(-50%); /* Смещение для точного центрирования */
+}
+
+.accordion-content-settings {
+    display: none;
+    background: #444;
+    width: 420px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 0 0 5px 5px;
+}
+
+.settings-input {
+    width: 100%;
+    padding: 15px;
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 5px;
+    box-sizing: border-box;
+    min-height: 100px; /* Достаточно высоты для написания описания */
+}
+
+.hidden-action-form {
+  display: none;
 }

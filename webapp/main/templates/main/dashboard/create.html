@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Профиль Страница{% endblock %}
+{% block title %}Создание новой ссылки{% endblock %}
 
 {% block head %}
     {{ block.super }}
@@ -12,51 +12,91 @@
 {% block content %}
 </head>
 <body>
-      <h1>СОЗДАНИЕ НОВОЙ ССЫЛКИ</h1>
-  <div class="form-container">
+    <h1>СОЗДАНИЕ НОВОЙ ССЫЛКИ</h1>
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
     <div class="content-selector">
        <div class="content-button active">
-         <a href="#" class="content-button-text-link"><i class="fa-solid fa-link fa-2xs"></i> Ссылка</a>
+           <a href="#" class="content-button-text-link"><i class="fa-solid fa-link fa-2xs"></i> Ссылка</a>
        </div>
-       <div class="content-button">
-          <a href="#" class="content-button-text-text"><i class="fa-solid fa-font"></i> Текст</a>
-       </div>
-    </div>
-    <input type="text" class="input-field" placeholder="Введите заголовок... *">
-    <input type="text" class="input-field" placeholder="Введите ссылку... *">
-      <div class="action-container">
-            <span class="add-action-text"><i class="fa-solid fa-trophy"></i> Добавить действие</span>
-            <button class="action-container-button" id="actionButton">Действие</button>
+           <div class="content-button">
+               <a href="#" class="content-button-text-text"><i class="fa-solid fa-font"></i> Текст</a>
+           </div>
         </div>
-          <!-- Контейнер для новых кнопок и полей, которые будут добавляться -->
-            <div id="newActionsContainer" class="new-actions-container"></div>
-         <!-- Убедитесь, что у вас только один элемент с ID myModal -->
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Выберите действие:</p>
-                <!-- Используйте data-action атрибуты вместо onclick -->
-                <button class="menu-item" data-action="channel">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span class="menu-item-text">ㅤПодписаться на канал</span>
-                </button>
-                <button class="menu-item" data-action="video">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span class="menu-item-text">ㅤПоставить лайк на видео</span>
-                </button>
-                <button class="menu-item" data-action="comment">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span class="menu-item-text">ㅤОставить комментарий</span>
-                </button>
-                <button class="menu-item" data-action="watch">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span class="menu-item-text">ㅤПосмотреть видео 30 секунд</span>
-                </button>
+
+          <!-- Скрытое поле для content_type -->
+          <input type="hidden" name="content_type" id="content_type" value="link">
+
+            <input type="hidden" name="actions-TOTAL_FORMS" id="id_actions-TOTAL_FORMS" value="0">
+            <input type="hidden" name="actions-INITIAL_FORMS" id="id_actions-INITIAL_FORMS" value="0">
+            <input type="hidden" name="actions-MIN_NUM_FORMS" id="id_actions-MIN_NUM_FORMS" value="0">
+            <input type="hidden" name="actions-MAX_NUM_FORMS" id="id_actions-MAX_NUM_FORMS" value="1000">
+
+
+          <div id="linkContent">
+              <input type="text" name="link_title" class="input-field" placeholder="Введите заголовок... *" required>
+              <input type="text" name="link_content" class="input-field" placeholder="Введите ссылку... *">
+          </div>
+
+          <div id="textContent" style="display:none;">
+              <input type="text" name="text_title" class="input-field" placeholder="Введите заголовок... *">
+              <textarea name="text_content" class="input-field" placeholder="Введите текст... *"></textarea>
+          </div>
+
+            <div class="action-container">
+                <span class="add-action-text"><i class="fa-solid fa-trophy"></i> Добавить действие</span>
+                <button type="button" class="action-container-button" id="actionButton">Действие</button>
             </div>
-        </div>
-      </div>
-  </div>
-</div>
+
+            <div id="newActionsContainer" class="new-actions-container"></div>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Выберите действие:</p>
+                    <button type="button" class="menu-item" data-action="channel"><i class="fa-brands fa-youtube"></i>ㅤПодписаться на канал</button>
+                    <button type="button" class="menu-item" data-action="video"><i class="fa-brands fa-youtube"></i>ㅤПоставить лайк на видео</button>
+                    <button type="button" class="menu-item" data-action="comment"><i class="fa-brands fa-youtube"></i>ㅤОставить комментарий</button>
+                    <button type="button" class="menu-item" data-action="watch"><i class="fa-brands fa-youtube"></i>ㅤПосмотреть видео 30 секунд</button>
+                </div>
+            </div>
+
+            <div class="accordion">
+                <button type="button" class="accordion-toggle" id="toggle-photo">
+                    <i class="fa-solid fa-pen"></i> Дизайн Страницы
+                    <i class="fa-solid fa-arrow-down" id="arrow-icon"></i>
+                </button>
+                <div class="accordion-content" id="photo-content">
+                    <div class="cover-image-container">
+                        <label class="cover-image-label"><i class="fa-solid fa-image"></i> ИЗОБРАЖЕНИЕ СТРАНИЦЫ</label>
+                        <input type="file" name="image" id="photo-upload" class="file-input" hidden />
+                        <input type="text" class="file-display-input" placeholder="" readonly />
+                        <label for="photo-upload" class="file-select-button">Загрузить</label>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion">
+                <button type="button" class="accordion-toggle accordion-toggle-settings" id="toggle-settings">
+                    <i class="fa-solid fa-gears"></i> Дополнительные Настройки
+                    <i class="fa-solid fa-arrow-down arrow-icon-settings"></i>
+                </button>
+                <div class="accordion-content accordion-content-settings" id="settings-content">
+                    <label class="cover-image-label"><i class="fa-solid fa-closed-captioning"></i> ОПИСАНИЕ СТРАНИЦЫ</label>
+                    <textarea name="description" class="input-field settings-input" placeholder="Введите описание страницы..."></textarea>
+                </div>
+            </div>
+
+            <!-- ManagementForm и поля для ActionFormSet -->
+            {% for form in action_formset %}
+              <div class="hidden-action-form">
+                {{ form }}
+              </div>
+            {% endfor %}
+
+
+            <button type="submit" class="submit-button">Отправить</button>
+        </form>
+    </div>
     <script src="{% static 'main/js/create.js' %}"></script>
 </body>
 {% endblock %}

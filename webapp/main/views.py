@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
+from .forms import PageForm, ActionFormSet
+from .models import Page, Action
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -50,3 +53,29 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+@login_required
+def create(request):
+    if request.method == 'POST':
+        print(request.POST)  # Debugging
+        page_form = PageForm(request.POST, request.FILES)
+        action_formset = ActionFormSet(request.POST, request.FILES, instance=Page())
+        if page_form.is_valid() and action_formset.is_valid():
+            page = page_form.save()
+            action_formset.instance = page
+            action_formset.save()
+            messages.success(request, 'Страница успешно создана!')
+            return redirect('home')
+        else:
+            print("ActionFormSet is valid: ", action_formset.is_valid())
+            print("ActionFormSet non-form errors: ", action_formset.non_form_errors())
+            for form in action_formset:
+                print("ActionForm errors: ", form.errors)
+    else:
+        page_form = PageForm()
+        action_formset = ActionFormSet(queryset=Action.objects.none())
+
+    return render(request, 'main/dashboard/create.html', {
+        'page_form': page_form,
+        'action_formset': action_formset
+    })
