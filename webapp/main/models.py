@@ -32,4 +32,3 @@ class Action(models.Model):
 
     def __str__(self):
         return f"{self.action_type} on {self.page.title}"
-
