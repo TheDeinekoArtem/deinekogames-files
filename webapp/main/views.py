@@ -7,6 +7,7 @@ from .forms import CustomUserCreationForm
 from .forms import PageForm, ActionFormSet
 from .models import Page, Action
 from django.contrib import messages
+from django.forms import formset_factory
 
 # Create your views here.
 def index(request):
@@ -18,10 +19,6 @@ def about(request):
 @login_required
 def home(request):
     return render(request, 'main/dashboard/home.html')
-
-@login_required
-def create(request):
-    return render(request, 'main/dashboard/create.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -57,20 +54,26 @@ def register_view(request):
 @login_required
 def create(request):
     if request.method == 'POST':
-        print(request.POST)  # Debugging
         page_form = PageForm(request.POST, request.FILES)
-        action_formset = ActionFormSet(request.POST, request.FILES, instance=Page())
+        action_formset = ActionFormSet(request.POST)
+
         if page_form.is_valid() and action_formset.is_valid():
-            page = page_form.save()
-            action_formset.instance = page
-            action_formset.save()
-            messages.success(request, 'Страница успешно создана!')
-            return redirect('home')
+            page = page_form.save(commit=False)
+            page.user = request.user
+            page.save()
+
+            # Сохраняем действия
+            actions = action_formset.save(commit=False)
+            for action in actions:
+                action.page = page
+                action.save()
+
+            messages.success(request, "Страница успешно создана!")
+            return redirect("home")
         else:
-            print("ActionFormSet is valid: ", action_formset.is_valid())
-            print("ActionFormSet non-form errors: ", action_formset.non_form_errors())
-            for form in action_formset:
-                print("ActionForm errors: ", form.errors)
+            print("Page Form Errors:", page_form.errors)
+            print("Action Formset Errors:", action_formset.errors)
+            messages.error(request, 'Исправьте ошибки в форме.')
     else:
         page_form = PageForm()
         action_formset = ActionFormSet(queryset=Action.objects.none())

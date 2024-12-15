@@ -18,16 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var linkContent = document.getElementById('linkContent');
   var textContent = document.getElementById('textContent');
 
-  actionButton.addEventListener('click', function() {
-    modal.style.display = 'flex';
-  });
-
-  closeButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      modal.style.display = 'none';
-    });
-  });
-
   window.addEventListener('click', function(event) {
     if (event.target === modal) {
       modal.style.display = 'none';
@@ -132,10 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   document.querySelectorAll('.content-button').forEach(button => {
-    button.addEventListener('click', function(event) {
-      var selectedContentType = this.querySelector('a').classList.contains('content-button-text-link') ? 'link' : 'text';
-      document.getElementById('content_type').value = selectedContentType;
-      updateFormVisibility();
+    button.addEventListener('click', function() {
+        const contentType = this.querySelector('a').classList.contains('content-button-text-link') ? 'link' : 'text';
+        document.getElementById('content_type').value = contentType;
     });
   });
 
